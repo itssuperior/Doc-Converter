@@ -6,6 +6,13 @@ from PIL import Image
 from docx import Document
 from bs4 import BeautifulSoup
 from docx.shared import Inches
+try:
+    GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
+    genai.configure(api_key=GOOGLE_API_KEY)
+except KeyError:
+    print("🚨 Error: GOOGLE_API_KEY environment variable not set.")
+    print("Please set your API key to run this script.")
+    exit()
 def pdf_to_docx_pipeline(pdf_path: str, docx_path: str):
     """
     The main pipeline function to convert a PDF to a DOCX file.
